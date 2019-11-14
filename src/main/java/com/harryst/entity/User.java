@@ -14,6 +14,30 @@ public class User implements Serializable{
     @Column(name="t_id")
     private Long id;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (age != user.age) return false;
+        if (!id.equals(user.id)) return false;
+        if (!name.equals(user.name)) return false;
+        if (address != null ? !address.equals(user.address) : user.address != null) return false;
+        return password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + age;
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + password.hashCode();
+        return result;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,38 +65,6 @@ public class User implements Serializable{
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (age != user.age) return false;
-        if (!id.equals(user.id)) return false;
-        if (!name.equals(user.name)) return false;
-        return address.equals(user.address);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + age;
-        result = 31 * result + address.hashCode();
-        return result;
-    }
-
     public int getAge() {
         return age;
 
@@ -85,6 +77,29 @@ public class User implements Serializable{
     @Column(name="t_age")
     private int age;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Column(name="t_address")
+
     private String address;
+
+    @Column(name="t_pwd")
+    private String password;
 }

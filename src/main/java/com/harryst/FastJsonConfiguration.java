@@ -29,7 +29,8 @@ public class FastJsonConfiguration extends WebMvcConfigurerAdapter {
         //修改配置返回内容的过滤
         fastJsonConfig.setSerializerFeatures(
                 SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteMapNullValue
+                SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteNullStringAsEmpty
         );
         fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
         //将fastjson添加到视图消息转换器列表内
